@@ -14,5 +14,18 @@ async function close(){
     await pool.end()
 }
 
+function ejecutarQuery(query){
+    return new Promise(async (resolve, reject) => {
+        pool.query(query, function (err, result, fields) {
+            if(err){
+                reject(err)
+            }else{
+                resolve(result)
+            }
+        });
+    })
+}
+
 module.exports.initialize = initialize;
 module.exports.close = close;
+module.exports.ejecutarQuery = ejecutarQuery;
